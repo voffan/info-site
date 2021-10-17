@@ -7,4 +7,8 @@ def index(request):
 
 
 def products(request):
-    return  render(request, 'info/products.html')
+    return render(request, 'info/products.html')
+
+
+def services(request):
+    return render(request, 'info/services.html')
