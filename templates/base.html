@@ -41,15 +41,18 @@
         a[class*="nav"] {
             color: black;
         }
+        address::before{
+            content:"Адрес: ";
+        }
     {% block styles %}{% endblock %}
     </style>
-    <title>{% block title %}{{ ORG_NAME }}{% endblock %}</title>
+    <title>{% block title %}{{ org.short_name }}{% endblock %}</title>
 </head>
 <body>
     <head>
         <nav class="navbar navbar-expand-md bg-light bg-gradient">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'info:index' %}">Аргыс</a>
+                <a class="navbar-brand" href="{% url 'info:index' %}">{{ org.short_name }}</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -64,6 +67,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Курсы 1С</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'info:about' %}">О компании</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -75,13 +81,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <address>г. Якутск, Орджоникидзе 46/1, офис 35</address>
-                        <a href="mailto:1c-argys@mail.ru">1c-argys@mail.ru</a><br/>
-                        <a href="tel:+7(4112)401131">+7(4112)401131</a><br/>
-                        <a id="insta" href="https://instagram.com/argys">argys</a><br/>
+                        <h6><a href="{% url 'info:contacts' %}">Контакты</a></h6>
+                        <address>{{ org.address }}</address>
+                        <a href="mailto:{{ org.email }}">{{ org.email }}</a><br/>
+                        <a href="tel:{{ org.telephone }}">{{ org.telephone }}</a><br/>
+                        <a id="insta" href="{{ org.insta }}">argys</a><br/>
                     </div>
                     <div class="col">
-                        <h6>Услуги</h6>
+                        <h6><a href="{% url 'info:products' %}">Продукты 1С</a></h6>
                         <ul>
                             <li>1C:Бухгалтерия Предприятия</li>
                             <li>Документооборот</li>
@@ -92,7 +99,15 @@
                         </ul>
                     </div>
                     <div class="col">
-                        <h6>О компании</h6>
+                        <h6><a href="{% url 'info:services' %}">Услуги</a></h6>
+                        <ul>
+                            <li>"Почасовое сопровождение"</li>
+                            <li>"Обновление 1С"</li>
+                            <li>"Абонентское сопровождение"</li>
+                            <li>"Обучение 1С"</li>
+                            <li>"Сопровождение 1С:КП (1С:ИТС)"</li>
+                            <li>"1С: ФРЕШ"</li>
+                        </ul>
                     </div>
                 </div>
             </div>

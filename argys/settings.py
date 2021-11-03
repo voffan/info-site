@@ -115,11 +115,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-ORG_NAME = 'Аргыс'
-ORG_ADDR = '677000 г. Якутск, пр-т Ленина, 1'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATICFILES_DIRS = (
+     os.path.join(BASE_DIR, 'static'), #сама папка указывается здесь
+)
 
 STATIC_URL = '/static/'
 
