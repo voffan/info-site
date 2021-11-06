@@ -13,6 +13,7 @@ class Org(Model):
     telephone = CharField('Номер телефона', max_length=15)
     email = CharField('Адрес э/почты', max_length=100)
     insta = CharField('Ссылка на Instagram аккаунт', max_length=250)
+    rss = CharField('Ссылка на RSS', max_length=200)
 
     def __str__(self):
         return self.short_name
@@ -32,6 +33,7 @@ class Release(Model):
     version = CharField('Версия', max_length=20)
     release_date = DateTimeField('Дата релиза')
     link = CharField('Ссылка', max_length=300)
+    active = BooleanField('Активная', default=True)
 
     def __str__(self):
         return self.program.name + ' ' + self.version

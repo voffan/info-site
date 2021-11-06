@@ -8,6 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     {% block additional_js %}{% endblock %}
     <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+        }
 		a[href^="mailto"]::before {
 		    display: inline-block;
             content: "";
@@ -44,6 +48,14 @@
         address::before{
             content:"Адрес: ";
         }
+        main{
+            min-height: 100%;
+            /*padding-bottom: 130px;*/
+        }
+        footer{
+            height: 130px;
+            /*margin-top: -130px;*/
+        }
     {% block styles %}{% endblock %}
     </style>
     <title>{% block title %}{{ org.short_name }}{% endblock %}</title>
@@ -77,42 +89,42 @@
     </head>
     <main>
         {% block content %}{% endblock %}
-        <footer class="mt-auto text-black-100 bg-light bg-gradient" style="font-size:8pt;">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h6><a href="{% url 'info:contacts' %}">Контакты</a></h6>
-                        <address>{{ org.address }}</address>
-                        <a href="mailto:{{ org.email }}">{{ org.email }}</a><br/>
-                        <a href="tel:{{ org.telephone }}">{{ org.telephone }}</a><br/>
-                        <a id="insta" href="{{ org.insta }}">argys</a><br/>
-                    </div>
-                    <div class="col">
-                        <h6><a href="{% url 'info:products' %}">Продукты 1С</a></h6>
-                        <ul>
-                            <li>1C:Бухгалтерия Предприятия</li>
-                            <li>Документооборот</li>
-                            <li>Зарплата и управление персоналом</li>
-                            <li>Решения для бюджетной организации</li>
-                            <li>Решения для комплексной автоматизации</li>
-                            <li>Решения для небольшой компании</li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <h6><a href="{% url 'info:services' %}">Услуги</a></h6>
-                        <ul>
-                            <li>"Почасовое сопровождение"</li>
-                            <li>"Обновление 1С"</li>
-                            <li>"Абонентское сопровождение"</li>
-                            <li>"Обучение 1С"</li>
-                            <li>"Сопровождение 1С:КП (1С:ИТС)"</li>
-                            <li>"1С: ФРЕШ"</li>
-                        </ul>
-                    </div>
+    </main>
+    <footer class="mt-auto text-black-100 bg-light bg-gradient" style="font-size:8pt;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h6><a href="{% url 'info:contacts' %}">Контакты</a></h6>
+                    <address>{{ org.address }}</address>
+                    <a href="mailto:{{ org.email }}">{{ org.email }}</a><br/>
+                    <a href="tel:{{ org.telephone }}">{{ org.telephone }}</a><br/>
+                    <a id="insta" href="{{ org.insta }}">argys</a><br/>
+                </div>
+                <div class="col">
+                    <h6><a href="{% url 'info:products' %}">Продукты 1С</a></h6>
+                    <ul>
+                        <li>1C:Бухгалтерия Предприятия</li>
+                        <li>Документооборот</li>
+                        <li>Зарплата и управление персоналом</li>
+                        <li>Решения для бюджетной организации</li>
+                        <li>Решения для комплексной автоматизации</li>
+                        <li>Решения для небольшой компании</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6><a href="{% url 'info:services' %}">Услуги</a></h6>
+                    <ul>
+                        <li>"Почасовое сопровождение"</li>
+                        <li>"Обновление 1С"</li>
+                        <li>"Абонентское сопровождение"</li>
+                        <li>"Обучение 1С"</li>
+                        <li>"Сопровождение 1С:КП (1С:ИТС)"</li>
+                        <li>"1С: ФРЕШ"</li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </main>
+        </div>
+    </footer>
     <script>{% block scripts %}{% endblock %}</script>
 </body>
 </html>
