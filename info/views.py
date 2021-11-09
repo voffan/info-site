@@ -31,16 +31,16 @@ def about(request):
     return render(request, 'info/about.html', {'org':org})
 
 
-def news(request):
+def courses(request):
     org = Org.objects.get(id=1)
-    news = News.objects.all().order_by('-pubDate')
-    return render(request, 'info/news.html', {'org': org, 'news': news})
+    return render(request, 'info/courses.html', {'org': org})
 
 
 class NewsListView(ListView):
     paginate_by = 15
     model = News
     template_name = 'info/news.html'
+    ordering = ['-pubDate']
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -53,6 +53,7 @@ class ReleaseListView(ListView):
     paginate_by = 10
     model = Release
     template_name = 'info/releases.html'
+    ordering = ['-release_date']
 
     def get_queryset(self):
         return Release.objects.select_related('program').filter(active=True)
