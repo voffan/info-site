@@ -48,7 +48,7 @@ def get_price_list(request):
             f_name = os.path.basename(org.price_list.name)
             response['Content-Disposition'] = 'attachment; filename=' + translit(f_name, "ru", reversed=True)
             return response
-    raise Http404
+    return render(request, 'info/404.html', {'org': org})
 
 
 class NewsListView(ListView):
