@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import transaction
-from django.db.models import CharField, ForeignKey, IntegerField, BooleanField, DecimalField, FloatField, DateTimeField
+from django.db.models import CharField, ForeignKey, IntegerField, BooleanField, FileField, FloatField, DateTimeField
 from django.db.models import Model, CASCADE, SET_NULL
 
 
@@ -14,6 +14,7 @@ class Org(Model):
     email = CharField('Адрес э/почты', max_length=100)
     insta = CharField('Ссылка на Instagram аккаунт', max_length=250)
     rss = CharField('Ссылка на RSS', max_length=200)
+    price_list = FileField(upload_to='pricelists/%m-%Y')
 
     def __str__(self):
         return self.short_name

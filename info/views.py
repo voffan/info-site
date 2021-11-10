@@ -1,5 +1,9 @@
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.conf import settings
+import os
+from transliterate import translit
 from info.models import *
 
 # Create your views here.
@@ -34,6 +38,17 @@ def about(request):
 def courses(request):
     org = Org.objects.get(id=1)
     return render(request, 'info/courses.html', {'org': org})
+
+
+def get_price_list(request):
+    org = Org.objects.get(id=1)
+    if os.path.exists(org.price_list.path):
+        with open(org.price_list.path, 'rb') as f:
+            response = HttpResponse(f.read(), content_type='application/'+os.path.splitext(org.price_list.name)[1][1:])
+            f_name = os.path.basename(org.price_list.name)
+            response['Content-Disposition'] = 'attachment; filename=' + translit(f_name, "ru", reversed=True)
+            return response
+    raise Http404
 
 
 class NewsListView(ListView):

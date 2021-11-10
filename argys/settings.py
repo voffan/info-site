@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-oja_q-p0i3ig&^%*!c!51!-y-ri5d%19t36ll$u()9zgs*r$ol
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -122,6 +122,8 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'download')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
