@@ -39,13 +39,12 @@ class Release(Model):
     def __str__(self):
         return self.program.name + ' ' + self.version
 
-    '''def save(self, *args, **kwargs):
+    def save(self, recursive_save=True, *args, **kwargs):
         active_release = Release.objects.filter(program__id=self.program.id, active=True).first()
-        if active_release is not None:
+        if active_release is not None and recursive_save:
             active_release.active = False
-            active_release.save()
+            active_release.save(recursive_save=False)
         super().save(*args, **kwargs)
-    '''
 
 
 class Program(Model):
