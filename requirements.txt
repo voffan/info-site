@@ -1,0 +1,8 @@
+asgiref==3.4.1
+Django==3.2.7
+feedparser==6.0.8
+pytz==2021.1
+sgmllib3k==1.0.0
+six==1.16.0
+sqlparse==0.4.2
+transliterate==1.10.2
