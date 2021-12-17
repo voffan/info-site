@@ -17,7 +17,6 @@
         <li>Обеспечение всесторонней информационной и технической поддержкой (тематические семинары, тренинги, марафоны, курсы по обучению, выездные курсы по «1С»).</li>
       </ul>
       <p><b>Мы всегда на страже порядка в 1С!</b></p>
-      <p align="center" style="font-size:16pt;"><b>Аргыстыын аргыстаhыан - астыктык улэлиэн!</b></p>
     </div>
   </div>
 
@@ -27,31 +26,45 @@
     <div class="col-sm-12 mx-auto">
       <div class="row">
         <div class="col-md-6">
-          <div class="list-group">
-            {% for item in releases %}
-            <a href="#" class="list-group-item list-group-item-action align-items-start">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{{ item.program }}</h5>
-                <small>v. {{ item.version }}</small>
+          <div class="card">
+            <div class="card-header">
+              <p class="h2">Релизы</p>
+            </div>
+            <div class="card-body">
+              <div class="list-group">
+              {% for item in releases %}
+              <a href="#" class="list-group-item list-group-item-action align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{ item.program }}</h5>
+                  <small>v. {{ item.version }}</small>
+                </div>
+                <p class="mb-1" style="text-align:right">{{ item.release_date|date:"d.m.Y" }}</p>
+              </a>
+              {% endfor %}
               </div>
-              <p class="mb-1" style="text-align:right">{{ item.release_date|date:"d.m.Y" }}</p>
-            </a>
-            {% endfor %}
+              <a href="{% url 'info:releases' %}">Все релизы</a>
+            </div>
           </div>
-          <a href="{% url 'info:releases' %}">Все</a>
         </div>
         <div class="col-md-6">
-          <div class="list-group">
-            {% for item in news %}
-            <a href="{{ item.link }}" class="list-group-item list-group-item-action align-items-start">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1" style="text-align:left">{{ item.title|truncatewords:15 }}</h5>
-                <small>{{ item.pubDate|date:"d.m.Y" }}</small>
+          <div class="card">
+            <div class="card-header">
+              <p class="h2">Новости</p>
+            </div>
+            <div class="card-body">
+              <div class="list-group">
+              {% for item in news %}
+              <a href="{{ item.link }}" class="list-group-item list-group-item-action align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1" style="text-align:left">{{ item.title|truncatewords:15 }}</h5>
+                  <small>{{ item.pubDate|date:"d.m.Y" }}</small>
+                </div>
+              </a>
+              {% endfor %}
               </div>
-            </a>
-            {% endfor %}
+              <a href="{% url 'info:news' %}">Все новости</a>
+            </div>
           </div>
-          <a href="{% url 'info:news' %}">Все</a>
         </div>
       </div>
     </div>
