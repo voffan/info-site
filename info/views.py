@@ -12,7 +12,8 @@ def index(request):
     org = Org.objects.get(id=1)
     news = News.objects.all().order_by('-pubDate')[:5]
     releases = Release.objects.all().order_by('-release_date')[:5]
-    return render(request, 'info/index.html', {'org': org, 'news': news, 'releases': releases})
+    carousels = CarouselImage.objects.filter(active=True).order_by('-id')[:5]
+    return render(request, 'info/index.html', {'org': org, 'news': news, 'releases': releases, 'carousels': carousels})
 
 
 def products(request):

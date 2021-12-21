@@ -11,3 +11,4 @@ class AdminNews(admin.ModelAdmin):
 
 admin.site.register(Release)
 admin.site.register(Program)
+admin.site.register(CarouselImage)

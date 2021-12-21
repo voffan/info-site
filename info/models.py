@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import transaction
-from django.db.models import CharField, ForeignKey, IntegerField, BooleanField, FileField, FloatField, DateTimeField
+from django.db.models import CharField, ForeignKey, ImageField, BooleanField, FileField, FloatField, DateTimeField
 from django.db.models import Model, CASCADE, SET_NULL
+from info.validators import validate_file_extension
 
 
 # Create your models here.
@@ -52,3 +53,12 @@ class Program(Model):
 
     def __str__(self):
         return self.name
+
+
+class CarouselImage(Model):
+    image = FileField(upload_to='images/', validators=[validate_file_extension])
+    link = CharField('Ссылка', max_length=300)
+    active = BooleanField('Активная', default=True)
+
+    def __str__(self):
+        return self.image.name
