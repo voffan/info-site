@@ -62,9 +62,9 @@
 </head>
 <body>
     <head>
-        <nav class="navbar navbar-expand-md bg-light bg-gradient">
+        <nav class="navbar navbar-expand-md" style="background-color:rgb(255,230,55);">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'info:index' %}">{{ org.short_name }}</a>
+                <a class="navbar-brand" href="{% url 'info:index' %}"><img height="50px" width="50px" src="{% static 'img/argys_logo_vert.jpg' %}"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -90,7 +90,7 @@
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer class="mt-auto text-black-100 bg-light bg-gradient" style="font-size:8pt;">
+    <footer class="mt-auto text-black-100" style="font-size:8pt;background-color:rgb(255,223,21);">
         <div class="container">
             <div class="row">
                 <div class="col">
