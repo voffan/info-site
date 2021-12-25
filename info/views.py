@@ -5,6 +5,7 @@ from django.conf import settings
 import os
 from transliterate import translit
 from info.models import *
+from info.forms import AddOrderForm
 
 # Create your views here.
 
@@ -18,7 +19,16 @@ def index(request):
 
 def products(request):
     org = Org.objects.get(id=1)
-    return render(request, 'info/products.html', {'org':org})
+    saved = False
+    if request.method == 'POST':
+        order_form = AddOrderForm(request.POST)
+        if order_form.is_valid():
+            order_form.save()
+            order_form = AddOrderForm()
+            saved = True
+    else:
+        order_form = AddOrderForm()
+    return render(request, 'info/products.html', {'org': org, 'form': order_form, 'order_is_saved': saved})
 
 
 def services(request):

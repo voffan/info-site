@@ -28,6 +28,28 @@
 
 {% block content %}
   {% load static %}
+<!--Modal Form--->
+<div class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="FormDescription" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="FormDescription">Оставьте заявку. Мы ее обязательно рассмотрим!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="orderForm" method="post">
+          {% csrf_token %}
+          {% for field in form %}
+          {{ field.label_tag }}{{ field }}
+          {% endfor %}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="sendOrder">Отправить</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="DescriptionModal" tabindex="-1" aria-labelledby="ProductDescription" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -146,11 +168,24 @@
   </div>
 </template>
 <!---------------------------------------->
+  {% if form.errors %}
+    {% for field in form %}
+      {% for error in field.errors %}
+      <div class="alert alert-danger">{{ error|escape }}</div>
+      {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">{{ error|escape }}</div>
+    {% endfor %}
+  {% endif %}
+  {% if order_is_saved %}
+  <div class="alert alert-success"><strong>Ваш заявка принята! Мы обязательно с вами свяжемся!</strong></div>
+  {% endif %}
   <h1 style="text-align:center;">Продукты 1С</h1>
   <div class="container">
     <div class="row">
       <div class="col-auto ms-auto">
-        <a class="btn btn-outline-primary" href="{% url 'info:pricelist' %}">Прайс-лист</a>
+        <a class="btn btn-outline-primary" href="{% url 'info:pricelist' %}" style="background-color:rgb(255,223,21);">Прайс-лист</a>
       </div>
     </div>
   </div>
@@ -209,6 +244,11 @@
             </div>
           </div>
         </div>
+        <div class="row pb-3">
+          <div class="col">
+            <button class="btn btn-primary" id="order">Оставить заявку</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -218,7 +258,12 @@
 var headers= ['1С: Бухгалтерия Предприятия','1С:Бухгалтерия государственного учреждения', '1С: Зарплата и управление персоналом', '1С: Зарплата и кадры государственного учреждения', '1С: Управление торговлей', '1С: Управление небольшой фирмой'];
 var templates = [document.getElementById('t1'), document.getElementById('t2'), document.getElementById('t3'), document.getElementById('t4'), document.getElementById('t6'), document.getElementById('t5')];
 var source = document.getElementById('DescriptionModal');
+var order = document.getElementById('ModalForm');
 var body = source.querySelector('.modal-body');
+
+var modalForm = new bootstrap.Modal(order, {
+    keyboard: false
+  });
 
 document.querySelectorAll('a[href^="#p"]').forEach(element=>{
   element.addEventListener('click', event => {
@@ -235,4 +280,23 @@ document.querySelectorAll('a[href^="#p"]').forEach(element=>{
     myModal.show();
   });
 })
+
+document.querySelector('#order').addEventListener('click', event => {
+  modalForm.show();
+});
+
+document.querySelector('#sendOrder').addEventListener('click', event => {
+  event.preventDefault();
+  document.querySelector('#orderForm').submit();
+  modalForm.Close();
+});
+
+{% if form.errors or order_is_saved%}
+setTimeout(()=>{
+document.querySelectorAll('.alert').forEach(element => {
+  element.style.display='none';
+});
+}, 4000);
+{% endif %}
+
 {% endblock %}

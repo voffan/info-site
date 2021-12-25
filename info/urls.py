@@ -14,4 +14,4 @@ urlpatterns = [
     path('courses', views.courses, name='courses'),
     path('pricelist', views.get_price_list, name='pricelist'),
     path('releases', views.ReleaseListView.as_view(), name='releases'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
